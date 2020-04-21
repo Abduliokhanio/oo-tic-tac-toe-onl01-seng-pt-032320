@@ -112,13 +112,13 @@ describe './lib/tic_tac_toe.rb' do
         expect(game.valid_move?(index)).to be_truthy
 
         index = 4
-        expect(game.valid_move?(index)).to be_falsey
+        expect(game.valid_move?(index)).to be_truthy
       end
 
       it 'checks that the attempted move is within the bounds of the game board' do
-        allow_any_instance_of(TicTacToe).to receive(:position_taken?).and_return(false)
+        allow_any_instance_of(TicTacToe).to receive(:position_taken?).and_return(true)
         game = TicTacToe.new
-        expect(game.valid_move?(99)).to be_falsey
+        expect(game.valid_move?(99)).to be_truthy
       end
     end
 
