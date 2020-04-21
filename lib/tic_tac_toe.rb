@@ -67,4 +67,70 @@ class TicTacToe
     display_board
   end
 
+  def won?
+    epoch = 0
+
+     while epoch < WIN_COMBINATIONS.length
+      first_index = WIN_COMBINATIONS[epoch][0]
+      sec_index = WIN_COMBINATIONS[epoch][1]
+      third_index = WIN_COMBINATIONS[epoch][2]
+
+      first_pos = @board[first_index]
+      sec_pos = @board[sec_index]
+      third_pos = @board[third_index]
+
+     if first_pos == sec_pos && sec_pos == third_pos && first_pos != " "
+
+        winning_combo = [first_index, sec_index, third_index]
+
+     end
+
+     #binding.pry
+    #   if array != WIN_COMBINATIONS[epoch]
+    #     false
+    #   else
+    #     true
+    #     break
+    #   end
+    epoch += 1
+    end
+    winning_combo
+  end
+
+  def full?
+    if turn_count == 9
+      true
+    end
+  end
+
+  def draw?
+    full? && !won?
+  end
+
+  def over?
+    draw? || won?
+  end
+
+  def winner
+    if winning_combo = won?
+      @board[winning_combo.first]
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+
+    if won?
+      if turn_count.odd?
+      puts "Congratulations X!"
+      else turn_count.even?
+      puts  "Congratulations O!"
+      end
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+
 end
